@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("n","<leader>pv",vim.cmd.Ex)
+
 vim.wo.number = true
 vim.wo.relativenumber = true
 
@@ -35,4 +36,9 @@ vim.keymap.set("n", "<C-f>", function()
   local result = vim.fn.system("tmux neww tmux-sessionizer")
   print(result)
 end, { silent = true })
+-- this is to use the system yank
+vim.keymap.set('n','<leader>y','"+y')
+vim.keymap.set('v','<leader>y','"+y')
+vim.opt.clipboard = 'unnamedplus'
+
 

@@ -21,33 +21,6 @@ return {
   },
 
   -- nvim-tree.lua configuration for the VS Code-like file explorer
-  {
-    'nvim-tree/nvim-tree.lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional, for file icons
-    config = function()
-      require("nvim-tree").setup({
-        view = {
-          width = 40, -- Width of the explorer window
-          side = "right", -- Position it on the left like VS Code
-        },
-        renderer = {
-          icons = {
-            show = {
-              git = true,
-              folder = true,
-              file = true,
-            },
-          },
-        },
-        filters = {
-          dotfiles = false, -- Show hidden files by default
-        },
-        git = {
-          enable = true,
-        },
-      })
-    end
-  },
 
   -- Adding keymap remap for toggling NvimTree
   vim.keymap.set('n', '<leader>k', ':NvimTreeToggle<CR>', { silent = true })

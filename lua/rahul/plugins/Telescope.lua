@@ -7,9 +7,19 @@ return {
 	vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 	vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 
+    local builtin = require('telescope.builtin')
+
     vim.keymap.set('n', '<leader>ps', function()
-        builtin.grep_string({ search = vim.fn.input("Grep > ") })
-    end)
+        local search_term = vim.fn.input("Search > ")
+        if search_term ~= "" then
+            builtin.live_grep({
+                default_text = search_term
+            })
+        else
+            builtin.live_grep()
+        end
+    end, { desc = "Search for a string using Telescope live_grep" })
+
      -- Custom function for searching in dynamic subfolder
     local function search_dynamic_subfolder()
       builtin.find_files({

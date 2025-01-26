@@ -41,4 +41,13 @@ vim.keymap.set('n','<leader>y','"+y')
 vim.keymap.set('v','<leader>y','"+y')
 vim.opt.clipboard = 'unnamedplus'
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*",
+    callback = function()
+        if vim.bo.filetype == "netrw" then
+            vim.opt_local.buflisted = false  -- Prevent netrw from being listed in buffers
+        end
+    end,
+})
+
 

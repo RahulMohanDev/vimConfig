@@ -1,9 +1,21 @@
 return {
-	--- Uncomment the two plugins below if you want to manage the language servers from neovim
+{'neovim/nvim-lspconfig'},
+{'hrsh7th/cmp-nvim-lsp'},
+{'hrsh7th/nvim-cmp'},
+{'L3MON4D3/LuaSnip'},
+{'VonHeikemen/lsp-zero.nvim',
+  branch = 'v3.x',
+  lazy = false,
+  config = false,
+},
 {'williamboman/mason.nvim'},
-{'williamboman/mason-lspconfig.nvim'},
-{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x', config=function() 
+{'williamboman/mason-lspconfig.nvim',
+  dependencies = {
+    {'VonHeikemen/lsp-zero.nvim'}
+  },
+  config=function()
 	local lsp_zero = require('lsp-zero')
+	lsp_zero.extend_lspconfig()
 
 	lsp_zero.on_attach(function(client, bufnr)
 	  local opts = {buffer = bufnr, remap = false}
@@ -23,7 +35,7 @@ return {
 	-- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 	require('mason').setup({})
 	require('mason-lspconfig').setup({
-	  ensure_installed = {'ast_grep', 'rust_analyzer'},
+	  ensure_installed = {'rust_analyzer', 'lua_ls', 'ts_ls', 'tailwindcss', 'cssls'},
 	  handlers = {
 	    lsp_zero.default_setup,
 	    lua_ls = function()
@@ -57,8 +69,4 @@ return {
 	  }),
 	})
 end},
-{'neovim/nvim-lspconfig'},
-{'hrsh7th/cmp-nvim-lsp'},
-{'hrsh7th/nvim-cmp'},
-{'L3MON4D3/LuaSnip'},
 }

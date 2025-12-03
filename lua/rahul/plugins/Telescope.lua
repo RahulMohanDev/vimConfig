@@ -9,16 +9,8 @@ return {
 
     local builtin = require('telescope.builtin')
 
-    vim.keymap.set('n', '<leader>ps', function()
-        local search_term = vim.fn.input("Search > ")
-        if search_term ~= "" then
-            builtin.live_grep({
-                default_text = search_term
-            })
-        else
-            builtin.live_grep()
-        end
-    end, { desc = "Search for a string using Telescope live_grep" })
+    vim.keymap.set('n', '<leader>ps', builtin.live_grep, { desc = "Live grep search" })
+    vim.keymap.set('n', '<leader>pw', builtin.grep_string, { desc = "Search word under cursor" })
 
      -- Custom function for searching in dynamic subfolder
     local function search_dynamic_subfolder()
